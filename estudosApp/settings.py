@@ -82,6 +82,7 @@ WSGI_APPLICATION = "estudosApp.wsgi.application"
 
 CSRF_TRUSTED_ORIGINS = [
     # trusted origins go here
+    'https://panteao.up.railway.app',
     'https://panteao.up.railway.app/login',
 ]
 # Database
