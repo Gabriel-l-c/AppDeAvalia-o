@@ -80,7 +80,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "estudosApp.wsgi.application"
 
-
+CSRF_TRUSTED_ORIGINS = [
+    # trusted origins go here
+    'https://panteao.up.railway.app/login',
+]
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

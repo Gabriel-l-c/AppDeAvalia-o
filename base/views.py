@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponse
-
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -23,7 +23,7 @@ from .forms import RoomForm, UserForm
 #queryi = Modelname.objects.get(Atribute -'value)
 
 # filter(attribte -='value') - retorna todos os itemas da tabela que correspondem ao atributo
-
+@csrf_protect
 def loginPage(request):
 
     page='login'
@@ -61,7 +61,7 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
-
+@csrf_protect
 def registerPage(request):
     # page = 'register'
     form = UserCreationForm()
@@ -154,6 +154,7 @@ def userProfile(request, pk):
 
 
 #criar a funcao que ira criar o formulario dinamico e motrar no temaplete
+@csrf_protect
 @login_required(login_url = 'login')
 def createRoom(request):
     form = RoomForm
@@ -191,7 +192,7 @@ def createRoom(request):
 
 
 
-
+@csrf_protect
 def updateRoom(request, pk):
     room = Room.objects.get(id=pk)
     ##veja que o instance, instancia o room exato que queremos atualizar, !!important
@@ -250,6 +251,7 @@ def deleteMessage(request, pk):
         return redirect('home')
     return render(request, 'base/delete.html', {'obj':message})
 
+@csrf_protect
 @login_required(login_url='login')
 def updateUser(request):
     user =request.user
